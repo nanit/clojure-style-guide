@@ -1070,6 +1070,17 @@ hints for the pairwise grouping with comments or empty lines.
     (meta a) ;=> {:private true}
     (meta #'a) ;=> nil
     ```
+* <a name="keys_destructure"></a>
+  Use `:keys` when destructuring 3 or more keys
+<sup>[[link](#keys_destructure)]</sup>
+
+    ```Clojure
+    ;; good
+    (let [{:keys [field1 field2 field3]} m] ...)
+
+    ;; bad
+    (let [{field1 :field1 field2 :field2 field3 :field3} m] ...)
+    ```
 
 ## Naming
 
