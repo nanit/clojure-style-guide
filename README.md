@@ -1071,6 +1071,30 @@ hints for the pairwise grouping with comments or empty lines.
     (meta #'a) ;=> nil
     ```
 
+* <a name="keyword_arguments"></a>
+  Prefer keyword arguments on multi arity when a function allows 2 or more optional parameters to avoid passing nil on function call.
+<sup>[[link](#keys_destructure)]</sup>
+
+    ```Clojure
+    ;; good
+    (defn my-fun [required & {:keys [optional1 optional2]}] ...)
+
+    (my-fun "required" :optional1 "o1")
+    (my-fun "required" :optional2 "o2")
+    (my-fun "required" :optional1 "o1 ":optional2 "o2")
+
+    ;; bad
+    (defn my-fun
+      ([required] (my-fun required nil nil))
+      ([required optional1] (my-fun required optional1 nil))
+      ([required optional1 optional2] (......)))
+
+    (my-fun "required")
+    (my-fun "required" "opt1")
+    ; nil?
+    (my-fun "required" nil "opt2")
+    ```
+
 ## Naming
 
 > The only real difficulties in programming are cache invalidation and
